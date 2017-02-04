@@ -12,9 +12,8 @@
 			<version>4.12</version>
 		</dependency>
 		<dependency>
-			<groupId>de.flare.game</groupId>
-			<artifactId>pokerServiceImpl</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+	<groupId>de.flare.poker.game</groupId>
+	<artifactId>pokerServiceImpl</artifactId>
+	<version>0.0.1-SNAPSHOT</version></dependency>
 	</dependencies>
-</project>
+</project> 

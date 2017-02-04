@@ -9,10 +9,11 @@ import org.junit.Test;
 
 import de.flare.poker.game.model.Card;
 import de.flare.poker.game.model.Hand;
+import de.flare.poker.game.model.enums.Category;
 import de.flare.poker.game.model.enums.Rank;
 import de.flare.poker.game.model.enums.Suit;
 import de.flare.poker.game.pokerService.PokerService;
-import de.flare.poker.game.pokerseviceimpl.PokerServiceImpl;
+import de.flare.poker.game.pokerserviceimpl.PokerServiceImpl;
 
 public class pokerServiceImplTest {
 	
@@ -20,7 +21,7 @@ public class pokerServiceImplTest {
 	public void pairIsHigherThanHighCard(){
 		
 		Hand handPair=generateHand(Suit.C, Rank.EIGHT,Suit.D, Rank.EIGHT,Suit.D, Rank.QUEEN,Suit.C, Rank.NINE,Suit.C, Rank.FOUR);
-		Hand handHighCard=generateHand(Suit.C, Rank.ACE_HIGH,Suit.D, Rank.TEN, Suit.H, Rank.FIVE, Suit.S, Rank.FOUR, Suit.C, Rank.TWO);
+		Hand handHighCard=generateHand(Suit.C, Rank.ACE,Suit.D, Rank.TEN, Suit.H, Rank.FIVE, Suit.S, Rank.FOUR, Suit.C, Rank.TWO);
 		
 		PokerService pokerService=new PokerServiceImpl();
 		assertEquals(handPair,pokerService.calculateHigherRank(handPair, handHighCard));
@@ -86,7 +87,7 @@ public class pokerServiceImplTest {
 	@Test
 	public void pokerIsHigherThanFullHouse(){
 		
-		Hand handPoker=generateHand(Suit.C, Rank.ACE_HIGH,Suit.D, Rank.ACE_HIGH, Suit.H, Rank.ACE_HIGH, Suit.S, Rank.ACE_HIGH, Suit.C, Rank.FOUR);
+		Hand handPoker=generateHand(Suit.C, Rank.ACE,Suit.D, Rank.ACE, Suit.H, Rank.ACE, Suit.S, Rank.ACE, Suit.C, Rank.FOUR);
 		Hand handFullHouse=generateHand(Suit.C, Rank.NINE,Suit.D, Rank.NINE, Suit.H, Rank.NINE, Suit.C, Rank.FIVE, Suit.S, Rank.FIVE);
 		
 		PokerService pokerService=new PokerServiceImpl();
@@ -97,8 +98,8 @@ public class pokerServiceImplTest {
 	@Test
 	public void straightFlushIsHigherThanPoker(){
 		
-		Hand handStraightFlush=generateHand(Suit.H, Rank.ACE_HIGH,Suit.H, Rank.KING, Suit.H, Rank.QUEEN, Suit.H, Rank.JACK, Suit.H, Rank.TEN);
-		Hand handPoker=generateHand(Suit.C, Rank.ACE_HIGH,Suit.D, Rank.ACE_HIGH, Suit.H, Rank.ACE_HIGH, Suit.S, Rank.ACE_HIGH, Suit.C, Rank.FOUR);
+		Hand handStraightFlush=generateHand(Suit.H, Rank.ACE,Suit.H, Rank.KING, Suit.H, Rank.QUEEN, Suit.H, Rank.JACK, Suit.H, Rank.TEN);
+		Hand handPoker=generateHand(Suit.C, Rank.ACE,Suit.D, Rank.ACE, Suit.H, Rank.ACE, Suit.S, Rank.ACE, Suit.C, Rank.FOUR);
 		
 		PokerService pokerService=new PokerServiceImpl();
 		assertEquals(handStraightFlush,pokerService.calculateHigherRank(handStraightFlush, handPoker));
@@ -108,7 +109,7 @@ public class pokerServiceImplTest {
 	@Test
 	public void pokerIsHigherThanTwoPairs(){
 		
-		Hand handPoker=generateHand(Suit.C, Rank.ACE_HIGH,Suit.D, Rank.ACE_HIGH, Suit.H, Rank.ACE_HIGH, Suit.S, Rank.ACE_HIGH, Suit.C, Rank.FOUR);
+		Hand handPoker=generateHand(Suit.C, Rank.ACE,Suit.D, Rank.ACE, Suit.H, Rank.ACE, Suit.S, Rank.ACE, Suit.C, Rank.FOUR);
 		Hand handTwoPairs=generateHand(Suit.C, Rank.EIGHT,Suit.D, Rank.EIGHT,Suit.D, Rank.NINE,Suit.C, Rank.NINE,Suit.C, Rank.FOUR);
 		
 		PokerService pokerService=new PokerServiceImpl();
@@ -119,7 +120,7 @@ public class pokerServiceImplTest {
 	@Test
 	public void straightFlushIsHigherThanFullHouse(){
 		
-		Hand handStraightFlush=generateHand(Suit.H, Rank.ACE_HIGH,Suit.H, Rank.KING, Suit.H, Rank.QUEEN, Suit.H, Rank.JACK, Suit.H, Rank.TEN);
+		Hand handStraightFlush=generateHand(Suit.H, Rank.ACE,Suit.H, Rank.KING, Suit.H, Rank.QUEEN, Suit.H, Rank.JACK, Suit.H, Rank.TEN);
 		Hand handFullHouse=generateHand(Suit.C, Rank.NINE,Suit.D, Rank.NINE, Suit.H, Rank.NINE, Suit.C, Rank.FIVE, Suit.S, Rank.FIVE);
 		
 		PokerService pokerService=new PokerServiceImpl();
@@ -127,6 +128,24 @@ public class pokerServiceImplTest {
 		
 	}
 	
+	@Test
+	public void straightFlushWithAceLowIsHigherThanFullHouse(){
+		
+		Hand handStraightFlush=generateHand(Suit.H, Rank.TWO,Suit.H, Rank.THREE, Suit.H, Rank.FOUR, Suit.H, Rank.FIVE, Suit.H, Rank.TEN);
+		Hand handFullHouse=generateHand(Suit.C, Rank.NINE,Suit.D, Rank.NINE, Suit.H, Rank.NINE, Suit.C, Rank.FIVE, Suit.S, Rank.FIVE);
+		
+		PokerService pokerService=new PokerServiceImpl();
+		assertEquals(handStraightFlush,pokerService.calculateHigherRank(handStraightFlush, handFullHouse));
+		
+	}
+	
+	
+	@Test
+	public void checkCategory(){
+		Hand handStraightFlush=generateHand(Suit.H, Rank.ACE,Suit.H, Rank.KING, Suit.H, Rank.QUEEN, Suit.H, Rank.JACK, Suit.H, Rank.TEN);
+		PokerServiceImpl pokerService=new PokerServiceImpl();
+		assertEquals(Category.STRAIGHT_FLUSH,pokerService.getHandCategory(handStraightFlush));
+	}
 	
 	private Hand generateHand(Suit suit1,Rank rank1, Suit suit2, Rank rank2, Suit suit3, Rank rank3, Suit suit4, Rank rank4, Suit suit5, Rank rank5){
 		
