@@ -77,7 +77,11 @@ public class PokerServiceImpl implements PokerService {
 					return Category.STRAIGHT_FLUSH;
 				}
 			} else {
-				return Category.STRAIGHT;
+				if(ranks.keySet().toArray()[3].equals(Rank.FIVE)){
+					return Category.STRAIGHT_LOW_ACE;
+				}else{
+					return Category.STRAIGHT;
+				}
 			}
 		} else {
 			if (suits.size() == 1) {
