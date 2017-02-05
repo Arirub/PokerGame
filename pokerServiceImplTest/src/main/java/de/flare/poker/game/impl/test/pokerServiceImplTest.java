@@ -217,6 +217,29 @@ public class pokerServiceImplTest {
 		
 	}
 	
+	@Test
+	public void straightFlushLowAceIsHigherThanFullHouse(){
+		
+		
+		Hand handStraightFlushLowAce=generateHand(Suit.H, Rank.TWO,Suit.H, Rank.THREE, Suit.H, Rank.FOUR, Suit.H, Rank.FIVE, Suit.H, Rank.ACE);
+		Hand handFullHouse=generateHand(Suit.C, Rank.NINE,Suit.D, Rank.NINE, Suit.H, Rank.NINE, Suit.C, Rank.FIVE, Suit.S, Rank.FIVE);
+		
+		PokerService pokerService=new PokerServiceImpl();
+		assertEquals(handStraightFlushLowAce,pokerService.calculateHigherRank(handStraightFlushLowAce, handFullHouse));
+		
+	}
+	
+	@Test
+	public void straightFlushIsHigherThanStraightFlushWithLowAce(){
+		
+		Hand handStraightFlush=generateHand(Suit.H, Rank.ACE,Suit.H, Rank.KING, Suit.H, Rank.QUEEN, Suit.H, Rank.JACK, Suit.H, Rank.TEN);
+		Hand handStraightFlushLowAce=generateHand(Suit.H, Rank.TWO,Suit.H, Rank.THREE, Suit.H, Rank.FOUR, Suit.H, Rank.FIVE, Suit.H, Rank.ACE);
+		
+		PokerService pokerService=new PokerServiceImpl();
+		assertEquals(handStraightFlush,pokerService.calculateHigherRank(handStraightFlush, handStraightFlushLowAce));
+		
+	}
+	
 	private Hand generateHand(Suit suit1,Rank rank1, Suit suit2, Rank rank2, Suit suit3, Rank rank3, Suit suit4, Rank rank4, Suit suit5, Rank rank5){
 		
 		Card card1=new Card(suit1, rank1);

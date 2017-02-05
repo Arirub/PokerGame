@@ -10,7 +10,8 @@ public enum Category {
 	FLUSH(6),
 	FULL_HOUSE(7),
 	POKER(8),
-	STRAIGHT_FLUSH(9);
+	STRAIGHT_FLUSH_LOW_ACE(9),
+	STRAIGHT_FLUSH(10);
 	
 	private int category;
 

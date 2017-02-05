@@ -12,9 +12,19 @@ import de.flare.poker.game.pokerService.PokerService;
 public class PokerServiceImpl implements PokerService {
 
 	public Hand calculateHigherRank(Hand handFirst, Hand handSecond) {
-		getHandCategory(handFirst);
-		getHandCategory(handSecond);
-		return null;
+		Category categoryFirst=getHandCategory(handFirst);
+		Category categorySecond=getHandCategory(handSecond);
+		if (categoryFirst.equals(categorySecond)) {
+			return null;
+		} else {
+			if (categoryFirst.getCategory() > categorySecond.getCategory()) {
+				System.out.println("The winner is: "+categoryFirst);
+				return handFirst;
+			} else {
+				System.out.println("The winner is: "+categorySecond);
+				return handSecond;
+			}
+		}
 	}
 
 	public Category getHandCategory(Hand hand) {
@@ -58,23 +68,22 @@ public class PokerServiceImpl implements PokerService {
 			else
 				suits.put(c.getSuit(), 1);
 		});
-		if ((lastCardRank - firstCardRank) == 4)  {
-			if (suits.size() == 1) {
-				System.out.println("STRAIGHT FLUSH");
-				return Category.STRAIGHT_FLUSH;
+		if (((lastCardRank - firstCardRank) == 4) || ((ranks.keySet().toArray()[3].equals(Rank.FIVE)) && (ranks.keySet().toArray()[4].equals(Rank.ACE)))) {
 
+			if (suits.size() == 1) {
+				if(ranks.keySet().toArray()[3].equals(Rank.FIVE)){
+					return Category.STRAIGHT_FLUSH_LOW_ACE;
+				}else{
+					return Category.STRAIGHT_FLUSH;
+				}
 			} else {
-				System.out.println("STRAIGHT");
 				return Category.STRAIGHT;
 			}
 		} else {
 			if (suits.size() == 1) {
-				System.out.println("FLUSH");
 				return Category.FLUSH;
 			} else {
-				System.out.println("HIGH CARD");
-				return Category.HIGH_CARD;// Esto aqui o deberia calcular cual
-											// es la carta mas alta??
+				return Category.HIGH_CARD;
 			}
 		}
 	}
@@ -83,23 +92,19 @@ public class PokerServiceImpl implements PokerService {
 		int highestNumberOfRanksRepeted = Collections
 				.max(ranks.entrySet(), (card1, card2) -> card1.getValue() - card2.getValue()).getValue();
 		if (highestNumberOfRanksRepeted == 3) {
-			System.out.println("THREE OF A KIND");
 			return Category.THREE_OF_A_KIND;
 		} else {
-			System.out.println("TWO PAIRS");
 			return Category.TWO_PAIRS;
 		}
 	}
-
+	
 	private Category getCategoryTwoDistinctCards(TreeMap<Rank, Integer> ranks) {
 
 		int highestNumberOfRanksRepeted = Collections
 				.max(ranks.entrySet(), (card1, card2) -> card1.getValue() - card2.getValue()).getValue();
 		if (highestNumberOfRanksRepeted == 4) {
-			System.out.println("POKER");
 			return Category.POKER;
 		} else {
-			System.out.println("FULL HOUSE");
 			return Category.FULL_HOUSE;
 		}
 	}

@@ -2,7 +2,6 @@ package de.flare.poker.game.model.enums;
 
 public enum Rank {
 	
-	ACE_LOW(1),
 	TWO(2),
 	THREE(3),
 	FOUR(4),
