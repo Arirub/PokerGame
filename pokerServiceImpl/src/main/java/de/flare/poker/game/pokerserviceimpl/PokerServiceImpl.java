@@ -22,14 +22,12 @@ public class PokerServiceImpl implements PokerService {
 		Category categoryFirst = getHandCategory(handFirst);
 		Category categorySecond = getHandCategory(handSecond);
 		if (categoryFirst.equals(categorySecond)) {
-			System.out.println("The winner is: " + calculateHighestRankSameCategory(handFirst,handSecond));
-			return calculateHighestRankSameCategory(handFirst,handSecond);
+			Hand winnerHand=calculateHighestRankSameCategory(handFirst,handSecond);
+			return winnerHand;
 		} else {
 			if (categoryFirst.getCategory() > categorySecond.getCategory()) {
-				System.out.println("The winner is: " + categoryFirst);
 				return handFirst;
 			} else {
-				System.out.println("The winner is: " + categorySecond);
 				return handSecond;
 			}
 		}
@@ -152,10 +150,10 @@ public class PokerServiceImpl implements PokerService {
 		return null;
 	}
 
-	private LinkedHashMap<Rank, Integer> getOrderedMap(Hand firstHand) {
+	private LinkedHashMap<Rank, Integer> getOrderedMap(Hand hand) {
 		TreeMap<Integer, Integer> ranksHand = new TreeMap<Integer, Integer>(Comparator.reverseOrder());
 
-		firstHand.getCards().forEach(c -> {
+		hand.getCards().forEach(c -> {
 			if (ranksHand.get(c.getRank().getRank()) != null)
 				ranksHand.put(c.getRank().getRank(), ranksHand.get(c.getRank().getRank()) + 1);
 			else
@@ -164,7 +162,6 @@ public class PokerServiceImpl implements PokerService {
 
 		Map<Object, Object> ranksMapped = ranksHand.entrySet().stream()
 				.sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
-
 				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
 		System.out.println("Sorted Map: " + Arrays.toString(ranksMapped.entrySet().toArray()));
@@ -173,7 +170,6 @@ public class PokerServiceImpl implements PokerService {
 		ranksMapped.forEach(( k,  v)-> {
 			int index=(int) k;
 			orderedCategoryValues.put( Rank.values()[index-2], (Integer) v) ;
-			System.out.println("Suit and Rank"+Rank.values()[(int) k-2]+"  "+ v);
 		});
 		return orderedCategoryValues;
 	}
