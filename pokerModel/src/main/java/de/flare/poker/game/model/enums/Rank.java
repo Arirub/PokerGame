@@ -26,4 +26,14 @@ public enum Rank {
 		return rank;
 	}
 	
+	public static Rank fromId(int id) {
+        for (Rank type : Rank.values()) {
+            if (type.getRank() == id) {
+                return type;
+            }
+        }
+        return null;
+    }
+
+	
 }

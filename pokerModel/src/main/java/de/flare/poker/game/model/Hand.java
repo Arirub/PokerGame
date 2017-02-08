@@ -5,7 +5,7 @@ import java.util.List;
 public class Hand {
 
 	List<Card> cards;
-
+	
 	public Hand(List<Card> cards) {
 		super();
 		this.cards = cards;
@@ -42,6 +42,11 @@ public class Hand {
 		} else if (!cards.equals(other.cards))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Hand [cards=" + cards + "]";
 	}
 		
 }
