@@ -20,17 +20,17 @@ import de.flare.poker.game.model.enums.Suit;
 import de.flare.poker.game.pokerService.PokerService;
 
 public class PokerServiceImpl implements PokerService {
-	private static final Log log=LogFactory.getLog(PokerServiceImpl.class);
-	
+	private static final Log log = LogFactory.getLog(PokerServiceImpl.class);
+
 	public Hand calculateHighestRank(Hand firstHand, Hand secondHand) {
-		
+
 		Category firstCategory = getHandCategory(firstHand);
 		Category secondCategory = getHandCategory(secondHand);
-		log.info("The category of the first hand: "+firstCategory);
-		log.info("The category of the second hand: "+secondCategory);
-		
+		log.info("The category of the first hand: " + firstCategory);
+		log.info("The category of the second hand: " + secondCategory);
+
 		if (firstCategory.equals(secondCategory)) {
-			Hand winnerHand=calculateHighestRankSameCategory(firstHand,secondHand);
+			Hand winnerHand = calculateHighestRankSameCategory(firstHand, secondHand);
 			return winnerHand;
 		} else {
 			if (firstCategory.getCategory() > secondCategory.getCategory()) {
@@ -42,20 +42,21 @@ public class PokerServiceImpl implements PokerService {
 	}
 
 	private TreeMap<Rank, Integer> getRanks(Hand hand) {
-		
-		 TreeMap<Rank, Integer> ranks = new TreeMap<Rank, Integer>();
-		 
-		 hand.getCards().forEach(c -> { 
-			 if (ranks.get(c.getRank()) != null)
-				 ranks.put(c.getRank(), ranks.get(c.getRank()) + 1); 
-			 else
-				 ranks.put(c.getRank(), 1); }); 
-		 return ranks;
+
+		TreeMap<Rank, Integer> ranks = new TreeMap<Rank, Integer>();
+
+		hand.getCards().forEach(c -> {
+			if (ranks.get(c.getRank()) != null)
+				ranks.put(c.getRank(), ranks.get(c.getRank()) + 1);
+			else
+				ranks.put(c.getRank(), 1);
+		});
+		return ranks;
 
 	}
 
 	public Category getHandCategory(Hand hand) {
-		
+
 		TreeMap<Rank, Integer> ranks = getRanks(hand);
 
 		Category category = null;
@@ -79,7 +80,7 @@ public class PokerServiceImpl implements PokerService {
 	}
 
 	private Category getCategoryFiveDistinctCards(TreeMap<Rank, Integer> ranks, Hand hand) {
-		
+
 		int firstCardRank = ranks.firstKey().getRank();
 		int lastCardRank = ranks.lastKey().getRank();
 
@@ -116,10 +117,10 @@ public class PokerServiceImpl implements PokerService {
 	}
 
 	private Category getCategoryThreeDistinctCards(TreeMap<Rank, Integer> ranks) {
-		
+
 		int highestNumberRanksRepeted = Collections
 				.max(ranks.entrySet(), (card1, card2) -> card1.getValue() - card2.getValue()).getValue();
-		
+
 		if (highestNumberRanksRepeted == 3) {
 			return Category.THREE_OF_A_KIND;
 		} else {
@@ -131,7 +132,7 @@ public class PokerServiceImpl implements PokerService {
 
 		int highestNumberRanksRepeted = Collections
 				.max(ranks.entrySet(), (card1, card2) -> card1.getValue() - card2.getValue()).getValue();
-		
+
 		if (highestNumberRanksRepeted == 4) {
 			return Category.POKER;
 		} else {
@@ -140,31 +141,32 @@ public class PokerServiceImpl implements PokerService {
 	}
 
 	public Hand calculateHighestRankSameCategory(Hand firstHand, Hand secondHand) {
-		
-		LinkedHashMap<Rank, Integer> ranksFirstHand=getOrderedMap(firstHand);
-		LinkedHashMap<Rank, Integer> ranksSecondHand=getOrderedMap(secondHand);
-		
-		List<Integer> firstKeys=new ArrayList<Integer>();
-		List<Integer> secondKeys=new ArrayList<Integer>();
 
-		
-		ranksFirstHand.forEach((k,v)->{
+		LinkedHashMap<Rank, Integer> ranksFirstHand = getOrderedMap(firstHand);
+		LinkedHashMap<Rank, Integer> ranksSecondHand = getOrderedMap(secondHand);
+
+		List<Integer> firstKeys = new ArrayList<Integer>();
+		List<Integer> secondKeys = new ArrayList<Integer>();
+
+		ranksFirstHand.forEach((k, v) -> {
 			firstKeys.add(k.getRank());
 		});
-		ranksSecondHand.forEach((k,v)->{
+		ranksSecondHand.forEach((k, v) -> {
 			secondKeys.add(k.getRank());
 		});
-		
+
 		for (int i = 0; i < firstKeys.size(); i++) {
-		    if (firstKeys.get(i)>secondKeys.get(i)) return firstHand;
-		    if (firstKeys.get(i)<secondKeys.get(i)) return secondHand;
+			if (firstKeys.get(i) > secondKeys.get(i))
+				return firstHand;
+			if (firstKeys.get(i) < secondKeys.get(i))
+				return secondHand;
 		}
-		
+
 		return null;
 	}
 
 	private LinkedHashMap<Rank, Integer> getOrderedMap(Hand hand) {
-		
+
 		TreeMap<Integer, Integer> ranksHand = new TreeMap<Integer, Integer>(Comparator.reverseOrder());
 
 		hand.getCards().forEach(c -> {
@@ -178,20 +180,15 @@ public class PokerServiceImpl implements PokerService {
 				.sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
 				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
-<<<<<<< HEAD
-=======
-		//System.out.println("Sorted Map: " + Arrays.toString(ranksMapped.entrySet().toArray()));
->>>>>>> branch 'master' of https://github.com/Arirub/PokerGame.git
 		log.info("Sorted Map: " + Arrays.toString(ranksMapped.entrySet().toArray()));
-		
-		LinkedHashMap<Rank, Integer>orderedCategoryValues =new LinkedHashMap<>();
-		ranksMapped.forEach(( k,  v)-> {
-			int index=(int) k;
-			orderedCategoryValues.put( Rank.values()[index-2], (Integer) v) ;
+
+		LinkedHashMap<Rank, Integer> orderedCategoryValues = new LinkedHashMap<>();
+		ranksMapped.forEach((k, v) -> {
+			int index = (int) k;
+			orderedCategoryValues.put(Rank.values()[index - 2], (Integer) v);
 		});
-		
+
 		return orderedCategoryValues;
 	}
-	
 
 }
