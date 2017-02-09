@@ -22,11 +22,19 @@ public class PokerInput {
 				+ "\nFor scoring purposes, the suits are unordered while the values are ordered as given above, "
 				+ "\nwith 2 being the lowest and ace the highest value.\n\n");
 		System.out.println(
+<<<<<<< HEAD
 				"Introduce the first hand, must contain 5 cards (e.g.:HA,S3,D4,D3,C4) and press Enter");
+=======
+				"You have to introduce the first hand, must contain 5 cards (e.g.:HA,S3,D4,D3,C4) and press Enter");
+>>>>>>> branch 'master' of https://github.com/Arirub/PokerGame.git
 		
 		Scanner scanner = new Scanner(System.in);
 		String firstHandInput = scanner.next();
+<<<<<<< HEAD
 		System.out.println("Introduce the second hand, must contain 5 cards (e.g.:H4,H3,S4,D8,C3) and press Enter");
+=======
+		System.out.println("You have to introduce the second hand, must contain 5 cards (e.g.:HA,S3,D4,D3,C4) and press Enter");
+>>>>>>> branch 'master' of https://github.com/Arirub/PokerGame.git
 		String secondHandInput = scanner.next();
 
 		scanner.close();

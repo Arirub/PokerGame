@@ -178,6 +178,10 @@ public class PokerServiceImpl implements PokerService {
 				.sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
 				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
+<<<<<<< HEAD
+=======
+		//System.out.println("Sorted Map: " + Arrays.toString(ranksMapped.entrySet().toArray()));
+>>>>>>> branch 'master' of https://github.com/Arirub/PokerGame.git
 		log.info("Sorted Map: " + Arrays.toString(ranksMapped.entrySet().toArray()));
 		
 		LinkedHashMap<Rank, Integer>orderedCategoryValues =new LinkedHashMap<>();
