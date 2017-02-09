@@ -21,7 +21,7 @@ public class PokerInputTest {
 		HashMap<String, Card> firstHand =generateHandHashMap(Suit.C, Rank.EIGHT, Suit.D, Rank.EIGHT, Suit.D, Rank.QUEEN, Suit.C, Rank.NINE, Suit.C, Rank.FOUR);
 		HashMap<String, Card> secondHand = generateHandHashMap(Suit.C, Rank.ACE, Suit.D, Rank.TEN, Suit.H, Rank.FIVE, Suit.C, Rank.FOUR, Suit.C, Rank.TWO);
 
-		assertTrue(PokerInput.checkRepeatedCards(firstHand, secondHand));
+		assertTrue(PokerInput.checkRepeatedIncorrectNumberCards(firstHand, secondHand));
 
 	}
 	@Test
@@ -30,7 +30,7 @@ public class PokerInputTest {
 		HashMap<String, Card> firstHand =generateHandHashMap(Suit.C, Rank.EIGHT, Suit.D, Rank.EIGHT, Suit.D, Rank.QUEEN, Suit.C, Rank.NINE, Suit.C, Rank.FOUR);
 		HashMap<String, Card> secondHand = generateHandHashMap(Suit.C, Rank.ACE, Suit.D, Rank.TEN, Suit.H, Rank.FIVE, Suit.D, Rank.FOUR, Suit.C, Rank.TWO);
 
-		assertFalse(PokerInput.checkRepeatedCards(firstHand, secondHand));
+		assertFalse(PokerInput.checkRepeatedIncorrectNumberCards(firstHand, secondHand));
 
 	}
 	@Test

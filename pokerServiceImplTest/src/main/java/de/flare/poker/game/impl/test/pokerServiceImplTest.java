@@ -32,7 +32,7 @@ public class pokerServiceImplTest {
 	public void twoPairIsHigherThanPair(){
 		
 		Hand handTwoPairs=generateHand(Suit.C, Rank.EIGHT,Suit.D, Rank.EIGHT,Suit.D, Rank.NINE,Suit.C, Rank.NINE,Suit.C, Rank.FOUR);
-		Hand handPair=generateHand(Suit.C, Rank.EIGHT,Suit.D, Rank.EIGHT,Suit.D, Rank.QUEEN,Suit.C, Rank.NINE,Suit.C, Rank.FOUR);
+		Hand handPair=generateHand(Suit.S, Rank.EIGHT,Suit.H, Rank.EIGHT,Suit.D, Rank.QUEEN,Suit.H, Rank.NINE,Suit.H, Rank.FOUR);
 		
 		PokerService pokerService=new PokerServiceImpl();
 		assertEquals(handTwoPairs,pokerService.calculateHighestRank(handTwoPairs, handPair));
@@ -43,7 +43,7 @@ public class pokerServiceImplTest {
 	public void threeOfAKindIsHigherThanTwoPairs(){
 		
 		Hand handThreeOfAKind=generateHand(Suit.C, Rank.KING,Suit.D, Rank.KING,Suit.H, Rank.KING,Suit.C, Rank.NINE,Suit.C, Rank.FOUR);
-		Hand handTwoPairs=generateHand(Suit.C, Rank.EIGHT,Suit.D, Rank.EIGHT,Suit.D, Rank.NINE,Suit.C, Rank.NINE,Suit.C, Rank.FOUR);
+		Hand handTwoPairs=generateHand(Suit.C, Rank.EIGHT,Suit.D, Rank.EIGHT,Suit.H, Rank.NINE,Suit.D, Rank.NINE,Suit.D, Rank.FOUR);
 		
 		PokerService pokerService=new PokerServiceImpl();
 		assertEquals(handThreeOfAKind,pokerService.calculateHighestRank(handThreeOfAKind, handTwoPairs));
@@ -55,7 +55,7 @@ public class pokerServiceImplTest {
 		
 		
 		Hand handStraight=generateHand(Suit.C, Rank.QUEEN,Suit.H, Rank.JACK, Suit.H, Rank.TEN, Suit.C, Rank.NINE, Suit.C, Rank.EIGHT);
-		Hand handThreeOfAKind=generateHand(Suit.C, Rank.KING,Suit.D, Rank.KING,Suit.H, Rank.KING,Suit.C, Rank.NINE,Suit.C, Rank.FOUR);
+		Hand handThreeOfAKind=generateHand(Suit.C, Rank.KING,Suit.D, Rank.KING,Suit.H, Rank.KING,Suit.D, Rank.NINE,Suit.C, Rank.FOUR);
 		
 		PokerService pokerService=new PokerServiceImpl();
 		assertEquals(handStraight,pokerService.calculateHighestRank(handStraight, handThreeOfAKind));
@@ -99,7 +99,7 @@ public class pokerServiceImplTest {
 	public void straightFlushIsHigherThanPoker(){
 		
 		Hand handStraightFlush=generateHand(Suit.H, Rank.ACE,Suit.H, Rank.KING, Suit.H, Rank.QUEEN, Suit.H, Rank.JACK, Suit.H, Rank.TEN);
-		Hand handPoker=generateHand(Suit.C, Rank.ACE,Suit.D, Rank.ACE, Suit.H, Rank.ACE, Suit.S, Rank.ACE, Suit.C, Rank.FOUR);
+		Hand handPoker=generateHand(Suit.C, Rank.NINE,Suit.D, Rank.NINE, Suit.H, Rank.NINE, Suit.S, Rank.NINE, Suit.C, Rank.FOUR);
 		
 		PokerService pokerService=new PokerServiceImpl();
 		assertEquals(handStraightFlush,pokerService.calculateHighestRank(handStraightFlush, handPoker));
@@ -110,7 +110,7 @@ public class pokerServiceImplTest {
 	public void pokerIsHigherThanTwoPairs(){
 		
 		Hand handPoker=generateHand(Suit.C, Rank.ACE,Suit.D, Rank.ACE, Suit.H, Rank.ACE, Suit.S, Rank.ACE, Suit.C, Rank.FOUR);
-		Hand handTwoPairs=generateHand(Suit.C, Rank.EIGHT,Suit.D, Rank.EIGHT,Suit.D, Rank.NINE,Suit.C, Rank.NINE,Suit.C, Rank.FOUR);
+		Hand handTwoPairs=generateHand(Suit.C, Rank.EIGHT,Suit.D, Rank.EIGHT,Suit.D, Rank.NINE,Suit.C, Rank.NINE,Suit.D, Rank.FOUR);
 		
 		PokerService pokerService=new PokerServiceImpl();
 		assertEquals(handPoker,pokerService.calculateHighestRank(handPoker, handTwoPairs));
@@ -234,7 +234,7 @@ public class pokerServiceImplTest {
 	public void straightFlushIsHigherThanStraightFlushLowAce(){
 		
 		Hand handStraightFlush=generateHand(Suit.H, Rank.ACE,Suit.H, Rank.KING, Suit.H, Rank.QUEEN, Suit.H, Rank.JACK, Suit.H, Rank.TEN);
-		Hand handStraightFlushLowAce=generateHand(Suit.H, Rank.TWO,Suit.H, Rank.THREE, Suit.H, Rank.FOUR, Suit.H, Rank.FIVE, Suit.H, Rank.ACE);
+		Hand handStraightFlushLowAce=generateHand(Suit.S, Rank.TWO,Suit.S, Rank.THREE, Suit.S, Rank.FOUR, Suit.S, Rank.FIVE, Suit.S, Rank.ACE);
 		
 		PokerService pokerService=new PokerServiceImpl();
 		assertEquals(handStraightFlush,pokerService.calculateHighestRank(handStraightFlush, handStraightFlushLowAce));
@@ -267,7 +267,7 @@ public class pokerServiceImplTest {
 	public void firstHighCardHandHasSameRankAsSecondHighCarHand(){
 		
 		Hand firstHighCardHand=generateHand(Suit.C, Rank.EIGHT,Suit.D, Rank.FIVE,Suit.S, Rank.FOUR,Suit.S, Rank.QUEEN,Suit.S, Rank.SEVEN);
-		Hand secondHighCarHand=generateHand(Suit.D, Rank.SEVEN,Suit.C, Rank.EIGHT,Suit.D, Rank.QUEEN,Suit.C, Rank.FIVE,Suit.C, Rank.FOUR);
+		Hand secondHighCarHand=generateHand(Suit.D, Rank.SEVEN,Suit.D, Rank.EIGHT,Suit.D, Rank.QUEEN,Suit.C, Rank.FIVE,Suit.C, Rank.FOUR);
 		
 		PokerServiceImpl pokerService=new PokerServiceImpl();
 		assertNull(pokerService.calculateHighestRankSameCategory(firstHighCardHand, secondHighCarHand));
