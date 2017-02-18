@@ -6,6 +6,9 @@ public class Hand {
 
 	List<Card> cards;
 	
+	public Hand(){
+		
+	}
 	public Hand(List<Card> cards) {
 		super();
 		this.cards = cards;

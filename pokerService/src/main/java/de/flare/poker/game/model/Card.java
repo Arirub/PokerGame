@@ -8,6 +8,9 @@ public class Card {
 	Suit suit;
 	Rank rank;
 	
+	public Card(){
+		
+	}
 	public Card(Suit suit, Rank rank) {
 		super();
 		this.suit = suit;
