@@ -15,7 +15,7 @@ import de.flare.poker.game.pokerserviceimpl.PokerServiceImpl;
 public class PokerInput {
 
 	public static void main(String[] args) {
-
+		//this is a comment-test
 		System.out.println(
 				"A poker deck contains 52 cards - each card has a suit which is one of clubs, diamonds, hearts, "
 						+ "or spades \n(denoted C, D, H, and S in the input data). Each card also has a value which is one "
