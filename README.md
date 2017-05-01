@@ -2,7 +2,8 @@
 Poker Game compare two given poker hands and indicate which, if either, has a higher rank.
 ##Prerequisites
 
-* JavaSE 1.8+
+* JavaSE 1.8
+* Maven 3.3.9
 
 ##How to use
 
